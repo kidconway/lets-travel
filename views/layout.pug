@@ -1,0 +1,49 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
+  body
+    block header
+      header
+        nav
+          a(href="/")
+            img(src='/images/logo.png' class='logo img-fluid')
+          ul
+            li 
+              a(href='/sign-up') Sign Up
+            li 
+              a(href='/login') Login
+        .search_nav
+          form 
+            .input_wrapper
+              label(for='destination') Destination
+              input(type='text' id='destination', name='destination' required)
+            .input_wrapper
+              label(for='duration') Duration
+              input(type='text' id='duration', name='duration' required)
+            .input_wrapper
+              label(for='departure-date') Departure Date
+              input(type='date' id='departure-date', name='durationDate' required)
+            .input_wrapper
+              label(for='number-guests') # of Guests
+              input(type='number' id='number-guests', name='numberGuests' required)
+            .input_wrapper
+              select(name='stars')
+                option(value='*') Min *
+                option(value='**') Min **
+                option(value='***') Min ***
+                option(value='****') Min ****
+                option(value='*****') Min *****
+            .input_wrapper
+              select(name='sort')
+                option(value='1') Price: Low - High
+                options(value='1') Price High - Low
+                
+            .input_wrapper
+              button(type='submit') Search
+        img(src='images/beach.jpg' class='img-fluid')
+        
+    block content
+    
