@@ -9,6 +9,7 @@ const indexRouter = require('./routes/index')
 
 const app = express()
 
+const { adminUsername, adminPassword } = require('./secrets/db_config')
 
 
 
@@ -17,7 +18,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
 // Set up Mongoose connection
-mongoose.connect('mongodb://kid_conway_admin:ratm3806@cluster0-shard-00-00-dvkmz.mongodb.net:27017,cluster0-shard-00-01-dvkmz.mongodb.net:27017,cluster0-shard-00-02-dvkmz.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority')
+mongoose.connect(`mongodb://${adminUsername}:${adminPassword}@cluster0-shard-00-00-dvkmz.mongodb.net:27017,cluster0-shard-00-01-dvkmz.mongodb.net:27017,cluster0-shard-00-02-dvkmz.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority`)
 mongoose.Promise = global.Promise
 mongoose.connection.on('error', error => console.error(error.message))
 
