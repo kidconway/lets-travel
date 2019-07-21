@@ -5,9 +5,26 @@ exports.homePage = (req, res) => {
   res.render('index', { title: 'Lets travel' })
 }
 
-exports.listAllHotels = (req, res) => {
+exports.listAllHotels = async (req, res, next) => {
+  try {
+    const allHotels = await Hotel.find({
+      available: { $eq: true }
+    })
 
-  res.render('all-hotels', { title: 'All Hotels' })
+    res.render('all-hotels', { title: 'All Hotels', allHotels })
+  } catch(errors) {
+    next(errors)
+  }
+}
+
+exports.listAllCountries = async (req, res, next) => {
+  try {
+    const allCountries = await Hotel.distinct('country')
+
+    res.render('all-countries', { title: 'Browse by Country', allCountries })
+  } catch(errors) {
+    next(errors)
+  }
 }
 
 exports.adminPage = (req, res) => {

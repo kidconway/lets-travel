@@ -1,13 +1,13 @@
-mixin hotel
+mixin hotel(hotel)
 
   .hotel
     .hotel_img
-      a(href='')
-        img(src='/images/hotels/hotel1.jpg' class='img-fluid')
+      a(href=`/all/${hotel._id}`)
+        img(src=`/images/hotels/${hotel.image}` class='img-fluid')
     .hotel_info
-      a(href='')
-        h3  Hotel 1
+      a(href=`/all/${hotel._id}`)
+        h3= hotel.hotel_name
       hr 
-      p Star Rating: 5
-      p Country: Fiji
-      p Cost per night: $600
+      p= `Star Rating: ${hotel.star_rating}`
+      p= `Country: ${hotel.country}`
+      p= `Cost per night: $ ${hotel.cost_per_night}`

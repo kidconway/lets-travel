@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  
+  h2= title
+    .country_wrapper
+      ul
+        each country in allCountries
+          li
+            .img-county-thumb
+              a(href=`/countries/${country}`) #{country}
+                img(src=`/images/countries/${country}.jpg` class='img-thumbnail')
+        else
+          li There are no countries
+            
