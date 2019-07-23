@@ -4,19 +4,20 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
-  body
+  body(class='container')
     block header
       header
-        nav
-          a(href="/")
-            img(src='/images/logo.png' class='logo img-fluid')
-          ul
-            li 
-              a(href='/sign-up') Sign Up
-            li 
-              a(href='/login') Login
+        nav(class='navbar navbar-expand-sm navbar-light bg-light')
+          a(href="/" class='navbar-brand')
+            img(src='/images/logo.png' class='logo')
+          div(class='collapse navbar-collapse' id='navbar-list')
+            ul(class='navbar-nav ml-auto')
+              li(class='nav-item')
+                a(href='/sign-up' class='nav-link') Sign Up
+              li(class='nav-item') 
+                a(href='/login' class='nav-link') Login
         .search_nav
-          form 
+          form(class='row') 
             .input_wrapper
               label(for='destination') Destination
               input(type='text' id='destination', name='destination' required)
@@ -43,6 +44,7 @@ html
                 
             .input_wrapper
               button(type='submit') Search
+      .row
         img(src='/images/beach.jpg' class='img-fluid')
            
     block content

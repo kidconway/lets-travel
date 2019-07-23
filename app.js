@@ -17,6 +17,13 @@ const { adminUsername, adminPassword } = require('./secrets/db_config')
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
+// handling local variables
+app.use( (req, res, next) => {
+  console.log(`The Current path is ${req.path}`)
+  res.locals.url = req.path
+  next()
+})
+
 // Set up Mongoose connection
 mongoose.connect(`mongodb://${adminUsername}:${adminPassword}@cluster0-shard-00-00-dvkmz.mongodb.net:27017,cluster0-shard-00-01-dvkmz.mongodb.net:27017,cluster0-shard-00-02-dvkmz.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority`)
 mongoose.Promise = global.Promise

@@ -43,6 +43,16 @@ exports.homePageFilters = async (req, res, next ) => {
   }
 }
 
+exports.countryDetail = async (req, res, next) => {
+  try {
+    const countryId = req.params.country
+    const countries = await Hotel.find({ country: countryId})
+    res.render('hotels-country', { title: `Browse by country: ${countryId}`, countries})
+  } catch(err) {
+    next(err)
+  }
+}
+
 
 
 exports.adminPage = (req, res) => {
@@ -64,6 +74,16 @@ exports.createHotelPost = async (req, res, next) => {
   }
 }
 
+exports.hotelDetail = async (req, res, next) => {
+  try {
+    const hotelData = await Hotel.find({ _id: req.params.id})
+
+    res.render(`hotel-detail`, { title: 'Lets Travel', hotelData} )
+  } catch(err) {
+    next(err)
+  }
+}
+
 exports.editRemoveGet = (req, res) => {
   res.render('edit-remove', {title: 'Search for Hotel to Edit or Remove'})
 }
@@ -71,8 +91,8 @@ exports.editRemoveGet = (req, res) => {
 exports.editRemovePost = async (req, res, next ) => {
   try {
     console.log(req.body)
-    const hotelId = req.body.hotel_id || null;
-    const hotelName = req.body.hotel_name || null;
+    const hotelId = req.body.hotel_id || null
+    const hotelName = req.body.hotel_name || null
 
     const hotelData = await Hotel.find({ $or: [
       { _id: hotelId },
@@ -84,6 +104,47 @@ exports.editRemovePost = async (req, res, next ) => {
 
     hotelData.length > 0 ? res.render('hotel-detail', { title: 'Add / Remove Hotel', hotelData }) : res.redirect('/admin/edit-remove')
 
+  } catch(err) {
+    next(err)
+  }
+}
+
+exports.updateHotelGet = async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const hotel = await Hotel.findOne({ _id: id})
+
+    res.render('add-hotel', { title: 'Update Hotel', hotel})
+  } catch(err) {
+    next(err)
+  }
+}
+
+exports.updateHotel = async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const hotel = await Hotel.findByIdAndUpdate(id, req.body, { new: true })
+    res.redirect(`/all/${id}`)
+  } catch(err) {
+    next(err)
+  }
+}
+
+exports.deleteHotelGet = async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const hotel = await Hotel.findOne({ _id: id})
+    res.render('add-hotel', { title: 'Delete Hotel', hotel} )
+  } catch(err) {
+    next(err)
+  }
+}
+
+exports.deleteHotel = async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const hotel = await Hotel.findByIdAndRemove({ _id: id })
+    res.redirect('/')
   } catch(err) {
     next(err)
   }
