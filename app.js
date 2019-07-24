@@ -1,10 +1,12 @@
+require('dotenv').config()
+
 const createError = require('http-errors')
 const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const mongoose = require('mongoose')
-require('dotenv').config()
+
 
 const indexRouter = require('./routes/index')
 
@@ -16,7 +18,7 @@ app.set('view engine', 'pug')
 
 // handling local variables
 app.use( (req, res, next) => {
-  console.log(`The Current path is ${req.path}`)
+  // console.log(`The Current path is ${req.path}`)
   res.locals.url = req.path
   next()
 })

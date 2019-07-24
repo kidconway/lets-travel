@@ -15,7 +15,9 @@ const {
   deleteHotelGet,
   deleteHotel,
   hotelDetail,
-  countryDetail
+  countryDetail,
+  upload,
+  pushToCloudinary
 } = require('../controllers/hotelController')
 
 // Get all day
@@ -25,19 +27,14 @@ router.get('/all/:id', hotelDetail)
 router.get('/countries', listAllCountries)
 router.get('/countries/:country', countryDetail)
 
-
-//Get all
-
-
-
 // Admin Routes
 router.get('/admin', adminPage)
 router.get('/admin/add', createHotelGet)
-router.post('/admin/add', createHotelPost)
+router.post('/admin/add', upload, pushToCloudinary, createHotelPost)
 router.get('/admin/edit-remove', editRemoveGet)
 router.post('/admin/edit-remove', editRemovePost)
 router.get('/admin/:id/update', updateHotelGet)
-router.post('/admin/:id/update', updateHotel)
+router.post('/admin/:id/update', upload, pushToCloudinary, updateHotel)
 router.get('/admin/:id/delete', deleteHotelGet)
 router.post('/admin/:id/delete', deleteHotel)
 

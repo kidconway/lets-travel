@@ -1,4 +1,8 @@
 mixin countryList(country)  
-  li
-    a(href=`/countries/${country}`) #{country}
-      img(src=`/images/countries/${country}.jpg` class='img-thumbnail')
+  .col-md-3
+    .text-center
+      a(href=`/countries/${country}`) #{country}
+    img.img-fluid.w-100(src=`/images/countries/${country}.jpg`)
+
+      
+ 

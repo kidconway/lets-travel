@@ -3,7 +3,7 @@ mixin hotel(hotel)
   .row.mb-2
     .col-md-4
       a(href=`/all/${hotel._id}`)
-        img.img-fluid.w-100(src=`/images/hotels/${hotel.image}`)
+        img.img-fluid.w-100(src=`http://res.cloudinary.com/dvgsgyjo7/image/upload/${hotel.image}.jpg`)
     .col-md-8
       a(href=`/all/${hotel._id}`)
         h3= hotel.hotel_name

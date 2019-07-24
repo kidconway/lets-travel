@@ -4,18 +4,13 @@ include mixins/_country_list
 
 block content
 
-  .outer_wrapper
-    .hotel_wrapper
-      h2.d-inline  Hotels
-      a(href='/all') (see all)
-
-      ul.list-group
-        each hotel in filteredHotels
-          +hotel(hotel)
-    div
-      h2 Countries
-      a(href='/countries') (see all)
-      ul
-        each country in filteredCountries
-          +countryList(country._id)
-      
+  h2.d-inline Hotels
+  a(href='/all') (see all)
+  ul.list-group
+    each hotel in filteredHotels
+      +hotel(hotel)
+  h2 Countries
+  a(href='/countries') (see all)
+  ul.row
+    each country in filteredCountries
+      +countryList(country._id)      
