@@ -1,14 +1,12 @@
 extends layout
+include mixins/_country_list
 
 block content
   
   h2= title
       ul
         each country in allCountries
-          li
-            .img-county-thumb
-              a(href=`/countries/${country}`) #{country}
-                img(src=`/images/countries/${country}.jpg` class='img-thumbnail')
+          +countryList(country)
         else
           li There are no countries
             

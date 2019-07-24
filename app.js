@@ -4,14 +4,11 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const mongoose = require('mongoose')
+require('dotenv').config()
 
 const indexRouter = require('./routes/index')
 
 const app = express()
-
-const { adminUsername, adminPassword } = require('./secrets/db_config')
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -25,7 +22,7 @@ app.use( (req, res, next) => {
 })
 
 // Set up Mongoose connection
-mongoose.connect(`mongodb://${adminUsername}:${adminPassword}@cluster0-shard-00-00-dvkmz.mongodb.net:27017,cluster0-shard-00-01-dvkmz.mongodb.net:27017,cluster0-shard-00-02-dvkmz.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority`)
+mongoose.connect(process.env.DB)
 mongoose.Promise = global.Promise
 mongoose.connection.on('error', error => console.error(error.message))
 

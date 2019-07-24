@@ -1,5 +1,6 @@
 extends layout
 include mixins/_hotel
+include mixins/_country_list
 
 block content
 
@@ -9,14 +10,12 @@ block content
       a(href='/all') (see all)
 
       ul.list-group
-        each hotel in hotels
+        each hotel in filteredHotels
           +hotel(hotel)
     div
       h2 Countries
       a(href='/countries') (see all)
       ul
-        each country in countries
-          li.card.mb-2.d-inline-block
-            a(href=`/countries/${country._id}`) #{country._id}
-            img.img-fluid.w-100(src=`/images/countries/${country._id}.jpg`)
+        each country in filteredCountries
+          +countryList(country._id)
       
