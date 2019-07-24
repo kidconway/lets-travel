@@ -17,35 +17,35 @@ html
               li(class='nav-item') 
                 a(href='/login' class='nav-link') Login
         .search_nav
-          form(class='row') 
-            .input_wrapper
-              label(for='destination') Destination
-              input(type='text' id='destination', name='destination' required)
-            .input_wrapper
-              label(for='duration') Duration
-              input(type='text' id='duration', name='duration' required)
-            .input_wrapper
-              label(for='departure-date') Departure Date
-              input(type='date' id='departure-date', name='durationDate' required)
-            .input_wrapper
-              label(for='number-guests') # of Guests
-              input(type='number' id='number-guests', name='numberGuests' required)
-            .input_wrapper
-              select(name='stars')
-                option(value='*') Min *
-                option(value='**') Min **
-                option(value='***') Min ***
-                option(value='****') Min ****
-                option(value='*****') Min *****
-            .input_wrapper
-              select(name='sort')
-                option(value='1') Price: Low - High
-                options(value='1') Price High - Low
-                
-            .input_wrapper
-              button(type='submit') Search
-      .row
-        img(src='/images/beach.jpg' class='img-fluid')
+          form.row
+            .col-md-6
+              .form-group
+                label(for='destination') Destination
+                input.form-control.form-control-sm(type='text' id='destination', name='destination' required)
+              .form-group
+                label(for='duration') Duration
+                input.form-control.form-control-sm(type='text' id='duration', name='duration' required)
+              .form-group
+                label(for='departure-date') Departure Date
+                input.form-control.form-control-sm(type='date' id='departure-date', name='durationDate' required)
+            .col-md-6
+              .form-group
+                label(for='number-guests') # of Guests
+                input.form-control.form-control-sm(type='number' id='number-guests', name='numberGuests' required)
+              .form-group
+                select.form-control.form-control-sm(name='stars')
+                  option(value='*') Min *
+                  option(value='**') Min **
+                  option(value='***') Min ***
+                  option(value='****') Min ****
+                  option(value='*****') Min *****
+              .form-group
+                select.form-control.form-control-sm(name='sort')
+                  option(value='1') Price: Low - High
+                  options(value='1') Price High - Low
+              .form-group
+                button.form-control.btn.btn-success(type='submit') Search
+        img.img-fluid.w-100.mb-3(src='/images/beach.jpg')
            
     block content
     

@@ -1,10 +1,10 @@
 mixin hotel(hotel)
 
-  .hotel
-    .hotel_img
+  .row.mb-2
+    .col-md-4
       a(href=`/all/${hotel._id}`)
-        img(src=`/images/hotels/${hotel.image}` class='img-fluid')
-    .hotel_info
+        img.img-fluid.w-100(src=`/images/hotels/${hotel.image}`)
+    .col-md-8
       a(href=`/all/${hotel._id}`)
         h3= hotel.hotel_name
       hr 

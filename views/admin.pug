@@ -3,12 +3,12 @@ extends layout
 block content
   h2= title
   hr
-  ul
-    li
-      a(href='/admin/add') Add New Hotel
-    li
-      a(href='/admin/edit-remove') Edit / Remove Hotel
-    li
-      a(href='/admin/order') View Bookings
+  ul.list-group
+    li.list-group-item
+      a.list-group-item-action(href='/admin/add') Add New Hotel
+    li.list-group-item
+      a.list-group-item-action(href='/admin/edit-remove') Edit / Remove Hotel
+    li.list-group-item
+      a.list-group-item-action(href='/admin/order') View Bookings
   
   

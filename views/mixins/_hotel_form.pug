@@ -1,28 +1,29 @@
 mixin hotelForm(hotel={})
 
   form(action='' method='POST')
-    .form_input
+    .form-group.my-1
       label(for='hotel_name') Hotel Name:
-      input(type='text' name='hotel_name' required value=hotel.hotel_name)
-    .form_input
+      input.form-control(type='text' name='hotel_name' required value=hotel.hotel_name)
+    .form-group.my-1
       label(for='description') Hotel Description:
-      textarea(name='hotel_description' id='hotel_description' cols='30' rows='10' required)=hotel.hotel_description
-    .form_input
+      textarea.form-control(name='hotel_description' id='hotel_description' cols='30' rows='10' required)=hotel.hotel_description
+    .form-group.my-1
       label(for='image') Hotel Image:
-      input(type='file' name='image' id='image')
-    .form_input
+      input.form-control-file(type='file' name='image' id='image')
+    .form-group.my-1
       label(for='star_rating') Star Rating:
-      input(type='number' name='star_rating' min='1' max='5' required value=hotel.star_rating)
-    .form_input
+      input.form-control(type='number' name='star_rating' min='1' max='5' required value=hotel.star_rating)
+    .form-group.my-1
       label(for='country') Country:
-      input(type='text' name='country' id='country' required value=hotel.country)
-    .form_input
+      input.form-control(type='text' name='country' id='country' required value=hotel.country)
+    .form-group.my-1
       label(for='cost_per_night') Cost Per Night:
-      input(type='number' name='cost_per_night' id='cost_per_night' min='1' required value=hotel.cost_per_night)
+      input.form-control(type='number' name='cost_per_night' id='cost_per_night' min='1' required value=hotel.cost_per_night)
+    .form-check.form-check-inline.my-1
+      input.form-check-input(type='radio' id='available' name='available' value='true' checked)   
+      label.form-check-label.mr-3(for='available') Availability
+      input.form-check-input(type='radio' id='unavailable' name='unavailable' value='false') 
+      label.form-check-label.mr-3(for='unavailable') Unavailabile
+
     .form_input
-      label(for='available') Availability:
-      input(type='radio' id='available' name='available' value='true' checked)
-      label(for='unavailable') Unavailabile:
-      input(type='radio' id='unavailable' name='unavailable' value='false')
-    .form_input
-      button(type='submit' class='button_small' ) CONFIRM
+      button.form-control.btn.btn-warning(type='submit' class='button_small' ) CONFIRM

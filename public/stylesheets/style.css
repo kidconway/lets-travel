@@ -12,3 +12,15 @@ body {
   max-width: 600px;
   width:100%;
 }
+
+.search_nav {
+  padding: 0.5em;
+}
+
+.search_nav > form {
+
+}
+
+input {
+
+}
