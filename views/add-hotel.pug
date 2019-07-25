@@ -2,10 +2,11 @@ extends layout
 include mixins/_hotel_form
 
 block content
-  h2= title
-  hr
-  a(href='/admin')
-    button.btn.btn-outline-dark(type='button') <- Back
-  +hotelForm(hotel)
+  .container
+    h2= title
+    hr
+    a(href='/admin')
+      button.btn.btn-outline-dark(type='button') <- Back
+    +hotelForm(hotel)
   
   

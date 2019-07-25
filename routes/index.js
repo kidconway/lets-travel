@@ -17,15 +17,18 @@ const {
   hotelDetail,
   countryDetail,
   upload,
-  pushToCloudinary
+  pushToCloudinary,
+  searchResults
 } = require('../controllers/hotelController')
 
-// Get all day
+
 router.get('/', homePageFilters)
 router.get('/all', listAllHotels)
 router.get('/all/:id', hotelDetail)
 router.get('/countries', listAllCountries)
 router.get('/countries/:country', countryDetail)
+
+router.post('/results', searchResults)
 
 // Admin Routes
 router.get('/admin', adminPage)

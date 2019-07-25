@@ -1,16 +1,48 @@
-mixin hotel(hotel)
+mixin hotel(hotel, searchQuery)
+  .container
+    .row.mb-2
+      .col-md-4
+        a(href=`/all/${ hotel._id }`)
+          img.img-fluid.w-100(src=`http://res.cloudinary.com/dvgsgyjo7/image/upload/${ hotel.image }.jpg`)
+      .col-md-5
+        a(href=`/all/${ hotel._id }`)
+          h3= hotel.hotel_name
+        hr 
+        if url.startsWith('/all/')  
+          p=hotel.hotel_description
+          hr
+        p= `Star Rating: ${ hotel.star_rating }`
+        p= `Country: ${ hotel.country }`
+        p= `Cost per night: $ ${ hotel.cost_per_night }`    
+      if url == '/results'
+        .col-md-3
+          .border.border-danger.bg-warning.p-3.mx-auto
+            h5.border-bottom= hotel.hotel_name
+            p= `Number of nights: ${ searchQuery.duration }`
+            p= `Departure date: ${ searchQuery.departureDate }`
+            - const costEach = searchQuery.duration * hotel.cost_per_night
+            - const costFormat = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            - const totalCost = costEach * searchQuery.numberGuests
+            - const total =  [ costFormat(totalCost), costFormat(costEach) ]
+            p= `Total per person $ ${ total[1] }`
+            hr
+            h5 Grand Total: $
+              span.text-danger=total[0]
 
-  .row.mb-2
-    .col-md-4
-      a(href=`/all/${hotel._id}`)
-        img.img-fluid.w-100(src=`http://res.cloudinary.com/dvgsgyjo7/image/upload/${hotel.image}.jpg`)
-    .col-md-8
-      a(href=`/all/${hotel._id}`)
-        h3= hotel.hotel_name
-      hr 
-      if url.startsWith('/all/')  
-        p=hotel.hotel_description
-        hr
-      p= `Star Rating: ${hotel.star_rating}`
-      p= `Country: ${hotel.country}`
-      p= `Cost per night: $ ${hotel.cost_per_night}`
+  if url.startsWith('/all/')
+    .container-fluid.no-gutters
+      form.form-inline.bg-dark.text-white.justify-content-center.py-4(action='/results' method='POST')
+        .form-group.mr-3
+          label.mr-3(for='destination') Destination: 
+          input.form-control(type='text' id='destination', name='destination' value=hotel.hotel_name)
+        .form-group.mr-3
+          label.mr-3(for='duration') Duration: 
+          input.form-control(type='text' id='duration', name='duration' required)
+        .form-group.mr-3
+          label.mr-3(for='departure-date') Departure Date: 
+          input.form-control(type='date' id='departure-date', name='durationDate' required)
+        .form-group.mr-3
+          label.mr-3(for='number-guests') # of Guests: 
+          input.form-control(type='number' id='number-guests', name='numberGuests' required)
+        .form-group.mr-3
+          button.form-control.btn.btn-success(type='submit') Search

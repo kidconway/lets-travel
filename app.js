@@ -24,7 +24,11 @@ app.use( (req, res, next) => {
 })
 
 // Set up Mongoose connection
-mongoose.connect(process.env.DB)
+const opts = {
+  useNewUrlParser: true
+};
+mongoose.set('useCreateIndex', true)
+mongoose.connect(process.env.DB, opts)
 mongoose.Promise = global.Promise
 mongoose.connection.on('error', error => console.error(error.message))
 

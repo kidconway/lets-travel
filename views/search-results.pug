@@ -4,6 +4,5 @@ include mixins/_hotel
 block content
   .container
     h2= title
-    each hotel in allHotels
-      .hotel_wrapper
-        +hotel(hotel)
+    each hotel in results
+      +hotel(hotel, searchQuery)

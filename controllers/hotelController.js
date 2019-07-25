@@ -178,3 +178,22 @@ exports.deleteHotel = async (req, res, next) => {
     next(err)
   }
 }
+
+
+exports.searchResults = async (req, res, next) => {
+  try {
+    const searchQuery = req.body
+    const parseStars = parseInt( searchQuery.stars )
+    const parseSort = parseInt(searchQuery.sort)
+    const results = await Hotel.aggregate([
+      { $match: { $text: { $search: `\"${ searchQuery.destination }\"` } } },
+      { $match: { available: true, star_rating: {  $gte: parseStars } } },
+      { $sort: { cost_per_night: parseSort } }
+    ])
+    console.log('hit')
+    res.render('search-results', { title: 'Search results', results, searchQuery })
+
+  } catch(err) {
+    next(err)
+  }
+}
