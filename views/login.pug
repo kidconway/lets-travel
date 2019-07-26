@@ -1,0 +1,14 @@
+extends layout
+block content
+
+  .container
+    h2= title
+    form(action='/login' method='POST')
+      .form-group
+        label(for='email') Email
+        input.form-control(type='email' name='email' id='email' required)
+      .form-group
+        label(for='password') Password
+        input.form-control(type='password' name='password' id='password' required)
+      .form-group
+        button.form-control.btn.btn-success(type='submit') CONFIRM

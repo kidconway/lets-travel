@@ -1,0 +1,24 @@
+mixin userForm(errors)
+
+  form(action='' method='POST')
+    .form-group
+      label(for='fname') First Name
+      input.form-control(type='text' name='fname' id='fname' required)
+    .form-group
+      label(for='lname') Last Name
+      input.form-control(type='text' name='lname' id='lname' required)
+    .form-group
+      label(for='email') Email
+      input.form-control(type='email' name='email' id='email' required)
+    .form-group
+      label(for='confirm_email') Confirm Email
+      input.form-control(type='email' name='confirm_email' id='confirm_email' required)
+    .form-group
+      label(for='password') Password
+      input.form-control(type='password' name='password' id='password' required)
+    .form-group
+      label(for='confirm_password') Confirm Password
+      input.form-control(type='password' name='confirm_password' id='confirm_password' required)
+    .form-group
+      button.form-control.btn.btn-success(type='submit') CONFIRM
+      

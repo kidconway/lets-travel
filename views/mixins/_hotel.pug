@@ -14,7 +14,7 @@ mixin hotel(hotel, searchQuery)
         p= `Star Rating: ${ hotel.star_rating }`
         p= `Country: ${ hotel.country }`
         p= `Cost per night: $ ${ hotel.cost_per_night }`    
-      if url == '/results'
+      if url == '/results' || url.startsWith('/confirmation/')
         .col-md-3
           .border.border-danger.bg-warning.p-3.mx-auto
             h5.border-bottom= hotel.hotel_name
@@ -28,10 +28,18 @@ mixin hotel(hotel, searchQuery)
             hr
             h5 Grand Total: $
               span.text-danger=total[0]
-
+            - const query = `id=${ hotel._id }&duration=${ searchQuery.duration }&departureDate=${ searchQuery.departureDate }&numberGuests=${ searchQuery.numberGuests }`
+            if url === '/results'
+              a.btn.btn-primary(href=`/confirmation/${ query }`) Continue to Confirmation
+            else if url.startsWith('/confirmation/')
+              if user
+                a.btn.btn-primary(href=`/order-placed/${ query }`) Place your order
+              else
+                a.btn.btn-danger(href=`/login`) Login to order
   if url.startsWith('/all/')
-    .container-fluid.no-gutters
-      form.form-inline.bg-dark.text-white.justify-content-center.py-4(action='/results' method='POST')
+    .container-fluid.bg-dark.text-white.mb-3
+      h4.text-white.text-center.pt-3 Book this Hotel
+      form.form-inline.justify-content-center.py-3(action='/results' method='POST')
         .form-group.mr-3
           label.mr-3(for='destination') Destination: 
           input.form-control(type='text' id='destination', name='destination' value=hotel.hotel_name)
@@ -40,9 +48,9 @@ mixin hotel(hotel, searchQuery)
           input.form-control(type='text' id='duration', name='duration' required)
         .form-group.mr-3
           label.mr-3(for='departure-date') Departure Date: 
-          input.form-control(type='date' id='departure-date', name='durationDate' required)
+          input.form-control(type='date' id='departure-date', name='departureDate' required)
         .form-group.mr-3
           label.mr-3(for='number-guests') # of Guests: 
           input.form-control(type='number' id='number-guests', name='numberGuests' required)
         .form-group.mr-3
-          button.form-control.btn.btn-success(type='submit') Search
+          button.form-control.btn.btn-success(type='submit') Book it

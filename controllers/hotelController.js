@@ -19,7 +19,8 @@ exports.pushToCloudinary = (req, res, next) => {
       req.body.image = result.public_id
       next()
     })
-    .catch( err => {
+    .catch( () => {
+      req.flash('error', 'There ws an error adding file.')
       res.redirect('/admin/add')
     })
   } else {
@@ -27,10 +28,6 @@ exports.pushToCloudinary = (req, res, next) => {
   }
 }
 
-// exports.homePage = (req, res) => {
-//
-//   res.render('index', { title: 'Lets travel' })
-// }
 
 exports.listAllHotels = async (req, res, next) => {
   try {
@@ -97,6 +94,7 @@ exports.createHotelPost = async (req, res, next) => {
   try {
     const hotel = new Hotel(req.body)
     await hotel.save()
+    req.flash('success', `${ hotel.hotel_name } was successfully added.`)
     res.redirect(`/all/${hotel._id}`)
   } catch(error) {
     next(error)
@@ -131,7 +129,13 @@ exports.editRemovePost = async (req, res, next ) => {
       strength: 2
     })
 
-    hotelData.length > 0 ? res.render('hotel-detail', { title: 'Add / Remove Hotel', hotelData }) : res.redirect('/admin/edit-remove')
+    if(hotelData.length > 0) {
+      res.render('hotel-detail', { title: 'Add / Remove Hotel', hotelData })
+      return
+    } else {
+      req.flash('info', 'No matching Hotel was found')
+      res.redirect('/admin/edit-remove')
+    }
 
   } catch(err) {
     next(err)
@@ -153,6 +157,7 @@ exports.updateHotel = async (req, res, next) => {
   try {
     const id = req.params.id
     const hotel = await Hotel.findByIdAndUpdate(id, req.body, { new: true })
+    req.flash('success', `${ hotel.hotel_name } was successfully updated.`)
     res.redirect(`/all/${id}`)
   } catch(err) {
     next(err)
@@ -163,6 +168,7 @@ exports.deleteHotelGet = async (req, res, next) => {
   try {
     const id = req.params.id
     const hotel = await Hotel.findOne({ _id: id})
+    req.flash('success', `${ hotel.hotel_name } was successfully deleted` )
     res.render('add-hotel', { title: 'Delete Hotel', hotel} )
   } catch(err) {
     next(err)
@@ -183,8 +189,8 @@ exports.deleteHotel = async (req, res, next) => {
 exports.searchResults = async (req, res, next) => {
   try {
     const searchQuery = req.body
-    const parseStars = parseInt( searchQuery.stars )
-    const parseSort = parseInt(searchQuery.sort)
+    const parseStars = parseInt( searchQuery.stars ) || 1
+    const parseSort = parseInt(searchQuery.sort) || 1
     const results = await Hotel.aggregate([
       { $match: { $text: { $search: `\"${ searchQuery.destination }\"` } } },
       { $match: { available: true, star_rating: {  $gte: parseStars } } },
@@ -196,4 +202,8 @@ exports.searchResults = async (req, res, next) => {
   } catch(err) {
     next(err)
   }
+}
+
+exports.fileNotFound = (req, res) => {
+  res.render('file-not-found')
 }

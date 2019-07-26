@@ -1,0 +1,10 @@
+extends layout
+include mixins/_hotel
+block content
+  .container
+    h2.text-center.border-bottom= title
+    each idx in hotel
+      li
+        +hotel(idx, searchData)
+    
+  
