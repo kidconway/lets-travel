@@ -10,7 +10,7 @@ block content
       if orders.length > 0
         h4 Your bookings:
         each order in orders
-          +orders(idx, order)
+          +orders( order)
       else
         h4 You currently don't have any orders.
     else

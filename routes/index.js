@@ -44,7 +44,7 @@ router.get('/all', listAllHotels)
 router.get('/all/:id', hotelDetail)
 router.get('/countries', listAllCountries)
 router.get('/countries/:country', countryDetail)
-router.get('*', fileNotFound)
+// router.get('*', fileNotFound)
 
 router.post('/results', searchResults)
 
