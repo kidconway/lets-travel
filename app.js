@@ -6,9 +6,19 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const mongoose = require('mongoose')
+const compression = require('compression')
+const helmet = require('helmet')
+
 const app = express()
 
+
+// basic production
+app.use(helmet());
+
 const indexRouter = require('./routes/index')
+
+// compress responses
+app.use(compression())
 
 // passport.js
 const User = require('./models/user')
